@@ -1,7 +1,7 @@
 use std::{ops::Deref, sync::Arc};
 
 use crate::state::AppState;
-use egui::{mutex::Mutex, Context, FontData, FontDefinitions, FontFamily, Vec2};
+use egui::{mutex::Mutex, Context, FontData, FontDefinitions, FontFamily, Vec2, Visuals};
 
 //#[derive(serde::Deserialize, serde::Serialize)]
 //#[serde(default)]
@@ -39,6 +39,7 @@ fn setup_custom_font(ctx: &Context) {
 impl ImgMagicksApp {
     pub fn new(_cc: &eframe::CreationContext) -> Self {
         setup_custom_font(&_cc.egui_ctx);
+        _cc.egui_ctx.set_visuals(Visuals::dark());
         Default::default()
     }
 }
@@ -61,6 +62,8 @@ impl eframe::App for ImgMagicksApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
             egui::menu::bar(ui, |ui| {
+                egui::widgets::global_dark_light_mode_switch(ui);
+                ui.separator();
                 if ui.button("Open image file...").clicked() {
                     self.handle_file(ctx);
                 }
