@@ -96,10 +96,16 @@ impl eframe::App for ImgMagicksApp {
                 });
                 ui.horizontal(|ui| {
                     ui.spacing_mut().item_spacing.x = 0.0;
-                    ui.label("Font used ");
+                    ui.label("font used ");
                     ui.hyperlink_to("\"Noto Sans Symbols2\"", "https://notofonts.github.io/");
                     ui.label(".");
                 });
+                ui.horizontal(|ui| {
+                    ui.spacing_mut().item_spacing.x = 0.0;
+                    ui.label("source codes are available on ");
+                    ui.hyperlink_to("GitHub", "https://github.com/taishi-sama/img-magicks");
+                    ui.label(".");
+                })
             });
         });
         egui::TopBottomPanel::top("indexator").show(ctx, |ui| {
